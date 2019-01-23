@@ -1,0 +1,36 @@
+﻿@using JoyLand.WebUI.Models
+@using JoyLand.WebUI.HtmlHelpers
+
+@model SweetsListViewModel
+
+@{
+    ViewBag.Title = "Товары";
+}
+<div class="jumbotron col-md-15">
+    <div class="container">
+        <div class="navbar-header">
+            @using (Html.BeginForm())  //для поиска
+            {
+                <div class="btn-group pull-right">
+                    Поиск по названию: @Html.TextBox("SearchString")
+                    <input type="submit" class="btn btn-success" value="Поиск" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="jumbotron col-md-15">
+    <div class="container">
+        <div class="navbar-header">
+            @foreach (var p in @Model.Sweets)
+            {
+                @Html.Partial("SweetSummary", p)
+            }
+        </div>
+    </div>
+    <div class="btn-group pull-right">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("List",
+            new { page = x, category = Model.CurrentCategory}))
+    </div>
+</div>
+

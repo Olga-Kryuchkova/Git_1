@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <style>
+        body {
+            background: url(fonts/candy-background.jpg);
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(window).scroll(function () { if ($(this).scrollTop() > 0) { $('#scroller').fadeIn(); } else { $('#scroller').fadeOut(); } });
+            $('#scroller').click(function () { $('body,html').animate({ scrollTop: 0 }, 400); return false; });
+        });</script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="/fonts/candy-logo.svg" width="50" height="30" class="d-inline-block align-top" alt="">
+                    @Html.ActionLink("Helgin Candy Shop", "List", "Sweet", new { area = "" }, new { @class = "navbar-brand" })
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("О программе", "About", "Sweet")</li>
+                    <li>@Html.ActionLink("Контакт", "Contact", "Sweet")</li>
+                    <li>@Html.ActionLink("Редактировать", "Index", "Admin")</li>
+                    <li>@Html.ActionLink("Пользователи", "Index", "Account")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron">
+            @if (TempData["message"] != null)
+            {
+                <div class="alert alert-success">@TempData["message"]</div>
+            }
+            @RenderBody()
+    </div>
+
+</body>
+</html>

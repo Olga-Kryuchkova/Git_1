@@ -1,0 +1,42 @@
+﻿@model JoyLand.Domain.Entities.Sweet
+
+<div class="well">
+
+    @if (Model.ImageData != null)
+    {
+        <div class="pull-left" style="margin-right: 10px">
+            <img class="img-thumbnail" width="200" height="200"
+                 src="@Url.Action("GetImage", "Sweet",
+                new { Model.Id })" />
+        </div>
+    }
+
+    <h3>
+        <strong>@Model.Name</strong>
+        <span class="pull-right label label-primary">@Model.Price.ToString("# грн")</span>
+    </h3>
+    <h4>
+        <p><span class="lead">Производитель: @Model.Brand</span></p>
+    </h4>
+    <h4>
+        <p><span class="lead">Страна: @Model.CountryOfOrigin</span></p>
+    </h4>
+    <h4>
+        <p><span class="lead">Вес поштучно: @Model.WeightByPiece</span></p>
+    </h4>
+    <p>
+        @using (Html.BeginForm("AddToCart", "Cart"))
+        {
+            <div class="pull-right">
+                @Html.HiddenFor(x => x.Id)
+                @if (Session["UserId"] != null)
+                {
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input type="submit" class="btn btn-success" value="Добавить в корзину" />
+                }
+            </div>
+        }
+    </p><br />
+
+    <span class="lead">@Model.Description</span>
+</div>

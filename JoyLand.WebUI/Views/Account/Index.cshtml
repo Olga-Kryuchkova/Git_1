@@ -1,0 +1,53 @@
+﻿@model IEnumerable<JoyLand.WebUI.Models.UserAccount>
+
+@{
+    ViewBag.Title = "Админ. панель: список пользователей";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Пользователи</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.UserID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.UserID })
+        </td>
+    </tr>
+}
+
+</table>

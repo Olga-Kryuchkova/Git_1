@@ -1,0 +1,16 @@
+﻿@model IEnumerable<string>
+
+@foreach (var link in Model)
+{
+    @Html.RouteLink(link, new
+{
+    controller = "Sweet",
+    action = "List",
+    brand = link,
+    page = 1
+}, new
+{
+    @class = "checkbox"
+        + (link == ViewBag.SelectedBrand ? " btn-primary" : "")
+})
+}
